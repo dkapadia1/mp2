@@ -13,7 +13,8 @@ const GalleryView: React.FC = () => {
       <div style={{ display: "flex", gap: "1rem" }}>
         {images.map(img => (
           <Link key={img.id} to={`/details/${img.id}`}>
-            <img src={img.src} alt={img.title} />
+            <h1>img.id</h1>
+            <>img.title</>
           </Link>
         ))}
       </div>

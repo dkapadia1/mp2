@@ -3,12 +3,11 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ListView from "./components/ListView";
 import GalleryView from "./components/GalleryView";
 import DetailView from "./components/DetailView";
-
 function App() {
   return (
     <BrowserRouter basename="/mp2">
       <nav>
-        <Link to="/">Home</Link> | <Link to="/gallery">Gallery</Link>
+        <Link to="/">ListView</Link> | <Link to="/gallery">Gallery</Link>
       </nav>
       <Routes>
         <Route path="/" element={<ListView />} />
