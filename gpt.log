@@ -1,0 +1,117 @@
+can you build a home page and some simple react components for each of the views? home can just be one of the components(prefeably list view)
+
+Suggested File Structure
+Code
+src/
+├── components/
+│   ├── ListView.tsx
+│   ├── GalleryView.tsx
+│   └── DetailView.tsx
+├── App.tsx
+├── index.tsx
+⚛️ Components
+ListView.tsx (used as Home)
+tsx
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+const ListView: React.FC = () => {
+  const [query, setQuery] = useState("");
+  const items = ["Pikachu", "Charmander", "Bulbasaur", "Squirtle"]; // mock data
+
+  const filtered = items.filter(item =>
+    item.toLowerCase().includes(query.toLowerCase())
+  );
+
+  return (
+    <div>
+      <h1>List View (Home)</h1>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+      />
+      <ul>
+        {filtered.map((item, idx) => (
+          <li key={idx}>
+            <Link to={`/details/${idx}`}>{item}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ListView;
+GalleryView.tsx
+tsx
+import React from "react";
+import { Link } from "react-router-dom";
+
+const GalleryView: React.FC = () => {
+  const images = [
+    { id: 1, src: "https://via.placeholder.com/150", title: "Item 1" },
+    { id: 2, src: "https://via.placeholder.com/150", title: "Item 2" },
+  ];
+
+  return (
+    <div>
+      <h1>Gallery View</h1>
+      <div style={{ display: "flex", gap: "1rem" }}>
+        {images.map(img => (
+          <Link key={img.id} to={`/details/${img.id}`}>
+            <img src={img.src} alt={img.title} />
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default GalleryView;
+DetailView.tsx
+tsx
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+
+const DetailView: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+
+  return (
+    <div>
+      <h1>Detail View</h1>
+      <p>Showing details for item {id}</p>
+      <div>
+        <Link to={`/details/${Number(id) - 1}`}>Previous</Link> |{" "}
+        <Link to={`/details/${Number(id) + 1}`}>Next</Link>
+      </div>
+    </div>
+  );
+};
+
+export default DetailView;
+🛠️ Routing Setup (App.tsx)
+tsx
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import ListView from "./components/ListView";
+import GalleryView from "./components/GalleryView";
+import DetailView from "./components/DetailView";
+
+function App() {
+  return (
+    <BrowserRouter basename="/mp2">
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/gallery">Gallery</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<ListView />} />
+        <Route path="/gallery" element={<GalleryView />} />
+        <Route path="/details/:id" element={<DetailView />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
