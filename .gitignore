@@ -1,0 +1,32 @@
+# Dependency directories
+mp2/node_modules/
+
+# Build output (regenerated on deploy)
+mp2/build/
+
+# Logs
+mp2/npm-debug.log*
+mp2/yarn-debug.log*
+mp2/yarn-error.log*
+
+# OS-specific clutter
+.DS_Store
+mp2/.DS_Store
+# Environment variables (API keys, secrets)
+.env.*
+
+# IDE-specific settings
+.vscode/
+.idea/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Coverage reports
+coverage/
+
+# Misc
+*.tgz
+*.log
+*.local
+*.swp
