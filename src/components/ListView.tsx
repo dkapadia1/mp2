@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import type { Stops, StopTuple } from "../types/mtd";
+import type { Stops } from "../types/mtd";
 //import { getAllStops } from "./calls";
 //import { parseStops } from "./parser";
 const ListView: React.FC<Stops> = ({stops}) => {
