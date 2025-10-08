@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const API_BASE = "https://developer.cumtd.com/api/v2.2/json";
-const API_KEY = "f72461d89d9047129830fe36b3dbd347"
-
+const API_KEY = "f72461d89d9047129830fe36b3dbd347";
 export async function getAllStops() {
   const apiKey = API_KEY;
   if (!apiKey) {
@@ -37,8 +36,9 @@ export async function getDeparturesByStop(stopID: string) {
         stop_id: stopID,
       },
     });
-
+    console.log(response.data);
     return response.data; // contains departures info
+    
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       console.error(

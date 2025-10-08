@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Base{
+  display: grid;
+}
+.ListView{
+  list-style:lower-latin;
+  padding-left: 10vh;
+}
+ul{
+  list-style-type:square;
+}
+.search{
+  min-width: 30vh;
+  max-width: 30vh;
+  height: 4vh;
+
+}
+nav{
+  padding-left: 10vh;
+  background-color: orange;
+  font-size: larger;
+  padding-bottom: 7vh;
+}
+.GalleryView{
+  display: grid;
+  padding-left: 10vh;
+}
+ol{
+  font-size: x-large;
+}
+.DetailView{
+  display:list-item;
+  padding-left:10vh;
+}
+.Previous{
+  color: orange;
+  font-size: xx-large;
+}
+.Next{
+  color: blue;
+  font-size: xx-large;
+}

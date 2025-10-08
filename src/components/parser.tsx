@@ -8,7 +8,8 @@ export function parseStops(data: any): StopTuple[] {
 export function parseDepartures(data: any): DepartureTuple[] {
   if (!data?.departures) return [];
   return data.departures.map((dep: any) => [
-    dep.route_id,
+    dep.route.route_short_name,
     dep.expected_mins, // minutes until departure
+    dep.route.route_color,
   ]);
 }
