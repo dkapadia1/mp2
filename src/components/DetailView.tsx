@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useParams, Link } from "react-router-dom";
-import type { DepartureTuple, Stops, StopTuple } from "../types/mtd";
-import { getDeparturesByStop, getStop, getNearStops } from "./calls";
+import type { DepartureTuple, Stops } from "../types/mtd";
+import { getDeparturesByStop } from "./calls";
 import { parseDepartures } from "./parser";
 
 
@@ -26,8 +26,7 @@ const DetailView: React.FC<Stops> = ({stops}) => {
     }
     fetchDepartures();
   }
-
-  )
+)
      if(!id){
         return (<div>
             404 NOT FOUND
@@ -35,14 +34,17 @@ const DetailView: React.FC<Stops> = ({stops}) => {
         }
         console.log(stops);
     const idx = stops.map(([id, title])=> id).indexOf(id);     
+    //I KNOW THERE IS INLINE STYLING BUT PLEASE IT JUST DOESNT MAKE SENSE TO DO ANYTHING ELSE.
+    // I COULD JUST REMOVE BUT IT LOOKS NICE WITH IT
   return (
     <div className="DetailView">
       <h1>Detail View</h1>
       <p>{loading ? "Loading" : "Showing"} departures for {id}</p>
       <ol>
+        
       {departures.map((departure) => (
-        <li>
-                <h1 className = "routeName"style={{ color: '#' + departure[2] }}>route : {departure[0]}</h1>
+        <li> 
+                <h1 className = "routeName "style={{ color: '#' + departure[2] }}>route : {departure[0]}</h1>
                 <h2 className="departTime">departes in: {departure[1]}</h2>
         </li>
               ))}

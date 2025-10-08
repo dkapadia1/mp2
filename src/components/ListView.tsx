@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import type { Stops, StopTuple } from "../types/mtd";
-import { getAllStops } from "./calls";
-import { parseStops } from "./parser";
+//import { getAllStops } from "./calls";
+//import { parseStops } from "./parser";
 const ListView: React.FC<Stops> = ({stops}) => {
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(true);
+ // const [loading, setLoading] = useState(true);
     /*useEffect(() => {
     const fetchStops = async () => {
       try {

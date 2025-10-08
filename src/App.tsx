@@ -6,6 +6,7 @@ import DetailView from "./components/DetailView";
 import { getAllStops} from "./components/calls";
 import type { StopTuple } from "./types/mtd";
 import { parseStops } from "./components/parser";
+import "./App.css"
 function App() {
   const [stops, setStops] = useState<StopTuple[]>([]);
 
@@ -13,11 +14,9 @@ function App() {
     const fetchStops = async () => {
       const raw = await getAllStops();
       setStops(parseStops(raw));
-      console.log(stops);
     }
     fetchStops();
-    console.log("HELLO")
-  }, []);
+  });
 
   return (
     <div className="Base">

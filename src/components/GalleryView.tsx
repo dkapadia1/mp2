@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
-import type { Stops, StopTuple } from "../types/mtd";
-import { getAllStops } from "./calls";
-import { parseStops } from "./parser";
+import type { Stops } from "../types/mtd";
+//import { getAllStops } from "./calls";
+//import { parseStops } from "./parser";
 const GalleryView: React.FC<Stops> = ({stops}) => {
     const [query, setQuery] = useState("");
-    const [loading, setLoading] = useState(true);
+    //const [loading, setLoading] = useState(true);
         /*useEffect(() => {
         const fetchStops = async () => {
           try {
@@ -37,7 +37,7 @@ const GalleryView: React.FC<Stops> = ({stops}) => {
         value={query}
         onChange={e => setQuery(e.target.value)}
       />
-      <div className = "GalleryItem" style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+      <div className = "GalleryItem">
         {filtered.map((stop, idx) => (
           <Link key={idx} to={`/details/${stop[0]}` } style = {{border:"solid"}}>
             <h1>{stop[1]}</h1>
