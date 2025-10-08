@@ -10,29 +10,26 @@ const DetailView: React.FC<Stops> = ({stops}) => {
   const [departures, setDepartures] = useState<DepartureTuple[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchDepartures = async () => {
-        try {
-            if(!id){
-                return;
-            }
-        const raw = await getDeparturesByStop(id);
-        const parsed = parseDepartures(raw);
-        setDepartures(parsed);
-            } catch (err) {
-        console.error("Error fetching stops:", err);
-            } finally {
-        setLoading(false);
-        }
+  const fetchDepartures = async () => {
+    try {
+      if (!id) return;
+      const raw = await getDeparturesByStop(id);
+      const parsed = parseDepartures(raw);
+      setDepartures(parsed);
+    } catch (err) {
+      console.error("Error fetching stops:", err);
+    } finally {
+      setLoading(false);
     }
-    fetchDepartures();
-  }
-)
+  };
+  fetchDepartures();
+}, [id]); // <-- only re-run when id changes
      if(!id){
         return (<div>
             404 NOT FOUND
         </div>)
         }
-        console.log(stops);
+        
     const idx = stops.map(([id, title])=> id).indexOf(id);     
     //I KNOW THERE IS INLINE STYLING BUT PLEASE IT JUST DOESNT MAKE SENSE TO DO ANYTHING ELSE.
     // I COULD JUST REMOVE BUT IT LOOKS NICE WITH IT
@@ -42,10 +39,10 @@ const DetailView: React.FC<Stops> = ({stops}) => {
       <p>{loading ? "Loading" : "Showing"} departures for {id}</p>
       <ol>
         
-      {departures.map((departure) => (
+      {departures.map((departure, idx) => (
         <li> 
-                <h1 className = "routeName "style={{ color: '#' + departure[2] }}>route : {departure[0]}</h1>
-                <h2 className="departTime">departes in: {departure[1]}</h2>
+                <h1 key = {idx} className = "routeName "style={{ color: '#' + departure[2] }}>route : {departure[0]}</h1>
+                <h2 key = {idx} className="departTime">departes in: {departure[1]}</h2>
         </li>
               ))}
     </ol>

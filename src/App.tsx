@@ -16,7 +16,7 @@ function App() {
       setStops(parseStops(raw));
     }
     fetchStops();
-  });
+  }, []);
 
   return (
     <div className="Base">

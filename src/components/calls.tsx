@@ -3,6 +3,7 @@ import axios from "axios";
 const API_BASE = "https://developer.cumtd.com/api/v2.2/json";
 const API_KEY = "f72461d89d9047129830fe36b3dbd347";
 export async function getAllStops() {
+  console.log("gettingStops");
   const apiKey = API_KEY;
   if (!apiKey) {
     throw new Error("Missing MTD_API_KEY in environment variables");
@@ -24,6 +25,7 @@ export async function getAllStops() {
 
 
 export async function getDeparturesByStop(stopID: string) {
+  console.log("gettingDeps");
   const apiKey = API_KEY;
   if (!apiKey) {
     throw new Error("Missing MTD_API_KEY in environment variables");
@@ -36,7 +38,6 @@ export async function getDeparturesByStop(stopID: string) {
         stop_id: stopID,
       },
     });
-    console.log(response.data);
     return response.data; // contains departures info
     
   } catch (error: any) {

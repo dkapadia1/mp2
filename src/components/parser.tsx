@@ -2,7 +2,7 @@ import type { StopTuple, DepartureTuple } from "../types/mtd";
 
 export function parseStops(data: any): StopTuple[] {
   if (!data?.stops) return [];
-  return data.stops.map((stop: any) => [stop.stop_id, stop.stop_name]);
+  return data.stops.map((stop: any) => [stop.stop_id, stop.stop_name, stop.stop_points[0].stop_lat, stop.stop_points[0].stop_lon]);
 }
 
 export function parseDepartures(data: any): DepartureTuple[] {
