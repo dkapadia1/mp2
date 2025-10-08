@@ -27,7 +27,7 @@ const GalleryView: React.FC<Stops> = ({stops}) => {
       let filtered = stops.filter(item =>
         item[1].toLowerCase().includes(query.toLowerCase())
       );
-    if (lat != "" && lon != ""){
+    if (lat !== "" && lon !== ""){
         filtered = filtered.filter((item) =>
             Math.abs(item[2]-parseFloat(lat)) + Math.abs(item[3] - parseFloat(lon)) < .0127
         );
