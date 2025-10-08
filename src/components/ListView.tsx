@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import type { StopTuple } from "../types/mtd";
+import { getAllStops } from "./calls";
+import { parseStops } from "./parser";
 const ListView: React.FC = () => {
   const [query, setQuery] = useState("");
   const items = ["Pikachu", "Charmander", "Bulbasaur", "Squirtle"]; // mock data
+  const [stops, setStops] = useState<StopTuple[]>([]);
+  const [loading, setLoading] = useState(true);
+    useEffect(() => {
+    const fetchStops = async () => {
+      try {
+        const raw = await getAllStops();
+        const parsed = parseStops(raw);
+        setStops(parsed);
+      } catch (err) {
+        console.error("Error fetching stops:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const filtered = items.filter(item =>
-    item.toLowerCase().includes(query.toLowerCase())
+    fetchStops();
+  }, []); // empty deps = run once on mount
+  if (loading) return <p>Loading stops…</p>;
+  console.log(stops.slice(0, 5));
+  const filtered = stops.filter(item =>
+    item[1].toLowerCase().includes(query.toLowerCase())
   );
 
   return (
     <div>
-      <h1>List View (Home)</h1>
+      <h1>List View</h1>
       <input
         type="text"
         placeholder="Search..."
@@ -21,7 +41,7 @@ const ListView: React.FC = () => {
       <ul>
         {filtered.map((item, idx) => (
           <li key={idx}>
-            <Link to={`/details/${idx}`}>{item}</Link>
+            <Link to={`/details/${item[1]}`}>{item[1]}</Link>
           </li>
         ))}
       </ul>

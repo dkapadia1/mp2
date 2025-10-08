@@ -1,0 +1,14 @@
+import type { StopTuple, DepartureTuple } from "../types/mtd";
+
+export function parseStops(data: any): StopTuple[] {
+  if (!data?.stops) return [];
+  return data.stops.map((stop: any) => [stop.stop_id, stop.stop_name]);
+}
+
+export function parseDepartures(data: any): DepartureTuple[] {
+  if (!data?.departures) return [];
+  return data.departures.map((dep: any) => [
+    dep.route_id,
+    dep.expected_mins, // minutes until departure
+  ]);
+}

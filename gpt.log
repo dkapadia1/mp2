@@ -115,3 +115,66 @@ function App() {
 }
 
 export default App;
+how do i call getAllStops (async) inside of my react component
+Perfect — let’s wire your async `getAllStops` call into a React component. In React, you generally want to:
+
+1. **Trigger the async call in a `useEffect`** (so it runs after the component mounts).
+2. **Store the results in state** with `useState`.
+3. **Render** based on that state.
+
+Here’s a clean example:
+
+```tsx
+import React, { useEffect, useState } from "react";
+import { getAllStops, parseStops } from "../api/mtdClient"; 
+// adjust import path to where you defined your functions
+
+import type { StopTuple } from "../types/mtd"; // if you exported the type
+
+const StopsList: React.FC = () => {
+  const [stops, setStops] = useState<StopTuple[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStops = async () => {
+      try {
+        const raw = await getAllStops();
+        const parsed = parseStops(raw);
+        setStops(parsed);
+      } catch (err) {
+        console.error("Error fetching stops:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStops();
+  }, []); // empty deps = run once on mount
+
+  if (loading) return <p>Loading stops…</p>;
+
+  return (
+    <ul>
+      {stops.map(([id, name]) => (
+        <li key={id}>
+          {id} — {name}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default StopsList;
+```
+
+---
+
+### 🔑 Key points
+- `useEffect` ensures the async call only runs after the component mounts.
+- `useState` holds the parsed stops so React can re-render when data arrives.
+- Always handle loading and error states to avoid rendering issues.
+- If you’re using TypeScript, typing `useState<StopTuple[]>([])` ensures your parsed data is recognized everywhere.
+
+---
+
+Would you like me to also show you how to **call `getDeparturesByStop` inside a component** (e.g. when a user clicks on a stop), so you can chain the two together?
